@@ -9,7 +9,7 @@ import {
   FormikContextType
 } from 'formik';
 
-interface FormExtraContextValue {
+export interface FormExtraContextValue {
   isDisabled?: boolean;
   setIsDisabled?: boolean;
 }
@@ -18,7 +18,7 @@ export const FormExtraContext = createContext<FormExtraContextValue>({
   isDisabled: null
 });
 
-interface FormExtraContextProviderProps {
+export interface FormExtraContextProviderProps {
   isDisabled?: boolean;
 }
 
