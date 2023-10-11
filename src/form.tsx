@@ -94,8 +94,12 @@ const Form = <Values extends FormikValues, S extends any = never>({
   disabled
 }: FormProps<Values, S>): JSX.Element => {
   const formRef = useRef<HTMLFormElement>(null);
+  const [hasChangedFromInitial, setHasChangedFromInitial] = useState(false);
   const _onChange = ({ values, isValid, dirty }: FormikContextType<Values>) => {
-    if (dirty) {
+    if (hasChangedFromInitial || dirty) {
+      if (!hasChangedFromInitial && dirty) {
+        setHasChangedFromInitial(true);
+      }
       instance.onChange(values, isValid, onChange);
     }
   };
