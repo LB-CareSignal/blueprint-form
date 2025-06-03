@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { Button, IButtonProps } from '@blueprintjs/core';
+import { Button, ButtonProps } from '@blueprintjs/core';
 
 import { MarkupType } from './types';
 import { MarkupProps, Markup } from './markup';
@@ -12,7 +12,7 @@ interface _SubmitButtonProps extends MarkupProps {
   validate?: never
 }
 
-export type SubmitButtonProps = _SubmitButtonProps & IButtonProps;
+export type SubmitButtonProps = _SubmitButtonProps & ButtonProps;
 
 export default class SubmitButton extends Markup<SubmitButtonProps> {
   
