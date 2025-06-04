@@ -36,15 +36,13 @@ export default class SelectInput extends Markup<SelectInputProps> {
   }
 
   public componentDidMount(): void {
-    if (this.props.ariaLabel) {
-      this.ref.setAttribute('aria-label', this.props.ariaLabel);
-    }
+    this.ref.setAttribute('aria-label', this.props.ariaLabel || this.props.label || '');
   }
 
   private getInput(field, form, meta): JSX.Element {
     return (
       <HTMLSelect
-        elementRef={(ref) => this.ref = ref}
+        ref={(ref) => this.ref = ref}
         className={this.props.className}
         style={this.props.style}
         fill={this.props.fill}
@@ -132,7 +130,7 @@ export class SelectBooleanInput extends Markup<SelectBooleanInputProps> {
     }];
     return (
       <HTMLSelect
-        elementRef={(ref) => this.ref = ref}
+        ref={(ref) => this.ref = ref}
         className={this.props.className}
         style={this.props.style}
         fill={this.props.fill}

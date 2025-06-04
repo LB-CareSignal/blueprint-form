@@ -234,7 +234,7 @@ const Enroll = ({
     description: 'Etiam varius neque feugiat elit aliquam venenatis.',
     isLevelA: true,
     isLevelB: false,
-    modules: null,
+    modules: [],
     days: [1, 5],
     dmType: 'II',
     color: 'green',
@@ -329,6 +329,7 @@ const Enroll = ({
               disabled={isFieldDisabled}
               onChange={onFieldChange.bind(this, 'annualAt')}
             />
+            
             <DateInput
               label="Blank Date"
               name="dateAt"
