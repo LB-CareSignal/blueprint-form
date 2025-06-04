@@ -9,7 +9,7 @@
     "url": "git+https://github.com/Epharmix/blueprint-form.git"
   },
   "scripts": {
-    "build": "webpack --config ./webpack.prod.js --mode production",
+    "build": "tsc --project tsconfig.prod.json && webpack --config ./webpack.prod.js --mode production",
     "dev": "webpack serve --config ./webpack.config.js",
     "watch": "webpack --config ./webpack.config.js --mode development",
     "prepublishOnly": "npm run build"
@@ -47,6 +47,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "core-js": "^3.42.0",
     "css-loader": "^7.1.2",
+    "dts-bundle-webpack": "^1.0.2",
     "eslint": "^9.28.0",
     "eslint-import-resolver-typescript": "^4.4.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -65,10 +66,12 @@
     "sass-loader": "^16.0.5",
     "style-loader": "^4.0.0",
     "styled-jsx": "^5.1.7",
+    "terser-webpack-plugin": "^5.3.14",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.3",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.2"
+    "webpack-dev-server": "^5.2.2",
+    "webpack-merge": "^6.0.1"
   }
 }

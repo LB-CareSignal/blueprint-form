@@ -1,14 +1,12 @@
 const path = require('path');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const DTSBundleWebpack = require('dts-bundle-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const base = require('./webpack.config.js');
 
-module.exports = merge.smartStrategy({
-  entry: 'replace'
-})(base, {
+module.exports = merge(base, {
   mode: 'production',
   watch: false,
   devtool: 'source-map',
@@ -20,11 +18,11 @@ module.exports = merge.smartStrategy({
       amd: ['Blueprint', 'Core'],
       root: ['Blueprint', 'Core']
     },
-    '@blueprintjs/datetime': {
-      commonjs: '@blueprintjs/datetime',
-      commonjs2: '@blueprintjs/datetime',
-      amd: ['Blueprint', 'Datetime'],
-      root: ['Blueprint', 'Datetime']
+    '@blueprintjs/datetime2': {
+      commonjs: '@blueprintjs/datetime2',
+      commonjs2: '@blueprintjs/datetime2',
+      amd: ['Blueprint', 'Datetime2'],
+      root: ['Blueprint', 'Datetime2']
     },
     moment: {
       root: 'moment',
