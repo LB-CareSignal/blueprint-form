@@ -3,17 +3,27 @@ const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
-  watch: true,
   entry: ['./examples/index.tsx'],
   devtool: 'inline-source-map',
+  resolve: {
+    modules: ['node_modules'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.css', '.scss'],
+  },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                '@babel/preset-env',
+                '@babel/preset-react',
+                '@babel/preset-typescript',
+              ],
+            }
           }
         ],
       },
@@ -36,18 +46,14 @@ module.exports = {
         ]
       },
       {
-        test: /\.(ts|tsx)$/,
-        use: [
-          'babel-loader',
-          'ts-loader',
-        ],
-        exclude: path.resolve(__dirname, 'node_modules'),
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
       },
     ],
-  },
-  resolve: {
-    modules: ['node_modules'],
-    extensions: ['.tsx', '.ts', '.js', '.jsx', '.css', '.scss'],
   },
   output: {
     path: `${__dirname}/public`,
@@ -60,11 +66,13 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: path.resolve(__dirname, 'public'),
-    liveReload: true,
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
+    compress: true,
+    hot: true,
     host: '0.0.0.0',
     port: 9000,
-    historyApiFallback: true,
-    writeToDisk: true,
+    historyApiFallback: true
   },
 };

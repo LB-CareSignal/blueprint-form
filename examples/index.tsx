@@ -129,18 +129,9 @@ const render = () => {
   ReactDOM.render(<App />, document.querySelector('#container'));
 };
 
-import('react-axe').then(({ default: axe }) => {
+import('@axe-core/react').then(({ default: axe }) => {
   axe(React, ReactDOM, 1000, {}, {
     exclude: [['.exclude-axe']]
   });
   render();
 });
-
-/* eslint-disable no-console */
-
-if (module && module.hot) {
-  module.hot.accept();
-  module.hot.addStatusHandler((status) => {
-    if (status === 'prepare') console.clear();
-  });
-}
