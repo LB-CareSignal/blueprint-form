@@ -18,6 +18,7 @@ export interface TextInputProps extends MarkupProps {
   type?: string,
   round?: boolean,
   small?: boolean,
+  size?: 'small' | 'medium' | 'large',
   leftIcon?: string,
   leftElement?: JSX.Element,
   rightElement?: JSX.Element,
@@ -91,6 +92,7 @@ export default class TextInput extends Markup<TextInputProps> {
         fill={this.props.fill}
         large={this.props.large}
         small={this.props.small}
+        size={this.props.size}
         leftIcon={this.props.leftIcon}
         leftElement={this.props.leftElement}
         rightElement={this.props.rightElement}

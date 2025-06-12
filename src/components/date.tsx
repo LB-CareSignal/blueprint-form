@@ -17,6 +17,7 @@ export interface DateInputProps extends MarkupProps {
   format?: DateFormat,
   min?: Date,
   max?: Date,
+  size?: 'medium' | 'large',
   isEndDate?: boolean
 }
 
@@ -202,6 +203,7 @@ class DateInput extends Markup<DateInputProps & { formik?: FormikContextType<For
                           id={this.switchId}
                           labelElement={<label htmlFor={this.switchId}>No End</label>}
                           large={this.props.large}
+                          size={this.props.size}
                           checked={this.state.isNoEnd}
                           disabled={this.props.disabled || this.context.isDisabled}
                           onChange={this.toggleNoEnd}

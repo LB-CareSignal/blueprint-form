@@ -12,7 +12,8 @@ import { MarkupProps, Markup } from './markup';
 export interface RadioGroupProps extends MarkupProps {
   inline?: boolean,
   options: Option[],
-  validate?: never
+  validate?: never,
+  size?: 'medium' | 'large'
 }
 
 export default class RadioGroup extends Markup<RadioGroupProps> {
@@ -47,6 +48,7 @@ export default class RadioGroup extends Markup<RadioGroupProps> {
                   aria-describedby={this.errorId}
                   style={this.props.style}
                   large={this.props.large}
+                  size={this.props.size}
                   key={i}
                   label={option.label}
                   value={String(option.value)}

@@ -12,7 +12,8 @@ import { MarkupProps, Markup } from './markup';
 export interface SwitchInputProps extends MarkupProps {
   innerLabel?: string,
   innerLabelChecked?: string,
-  valdate?: never
+  valdate?: never,
+  size?: 'medium' | 'large'
 }
 
 export default class SwitchInput extends Markup<SwitchInputProps> {
@@ -31,6 +32,7 @@ export default class SwitchInput extends Markup<SwitchInputProps> {
             className={this.props.className}
             style={this.props.style}
             large={this.props.large}
+            size={this.props.size}
             id={this.id}
             labelElement={<label htmlFor={this.id}>{this.props.label}</label>}
             checked={field.checked}

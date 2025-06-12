@@ -12,6 +12,7 @@ import { MarkupProps, Markup } from './markup';
 export interface CheckboxProps extends MarkupProps {
   inline?: boolean,
   value?: string,
+  size?: 'medium' | 'large',
   validate?: never
 }
 
@@ -49,6 +50,7 @@ export default class Checkbox extends Markup<CheckboxProps> {
               labelElement={<label htmlFor={this.id}>{label}</label>}
               inline={this.props.inline}
               large={this.props.large}
+              size={this.props.size}
               value={this.props.value}
               checked={field.checked}
               name={field.name}
@@ -73,6 +75,7 @@ export default class Checkbox extends Markup<CheckboxProps> {
 export interface CheckboxGroupProps extends MarkupProps {
   inline?: boolean,
   options: Option[],
+  size?: 'medium' | 'large',
   numItems?: number,
   minItems?: number,
   maxItems?: number
@@ -150,6 +153,7 @@ export class CheckboxGroup extends Markup<CheckboxGroupProps> {
                     value={String(option.value)}
                     inline={this.props.inline}
                     large={this.props.large}
+                    size={this.props.size}
                     disabled={this.props.disabled || this.context.isDisabled || this.isDisabled(option.value, field.value)}
                     onChange={(event) => {
                       const isChecked = event.currentTarget.checked;

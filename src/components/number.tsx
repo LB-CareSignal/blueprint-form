@@ -12,7 +12,8 @@ import { MarkupProps, Markup } from './markup';
 export interface NumberInputProps extends MarkupProps {
   placeholder?: string,
   min?: number,
-  max?: number
+  max?: number,
+  size?: 'medium' | 'large'
 }
 
 export default class TextInput extends Markup<NumberInputProps> {
@@ -61,6 +62,7 @@ export default class TextInput extends Markup<NumberInputProps> {
         style={this.props.style}
         fill={this.props.fill}
         large={this.props.large}
+        size={this.props.size}
         id={this.id}
         name={field.name}
         min={this.props.min}

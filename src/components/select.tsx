@@ -11,6 +11,7 @@ import { MarkupProps, Markup } from './markup';
 
 export interface SelectInputProps extends MarkupProps {
   options: Option[],
+  size?: 'small' | 'medium' | 'large',
   validate?: never
 }
 
@@ -47,6 +48,7 @@ export default class SelectInput extends Markup<SelectInputProps> {
         style={this.props.style}
         fill={this.props.fill}
         large={this.props.large}
+        size={this.props.size}
         id={this.id}
         intent={meta.error && meta.touched ? 'danger' : 'none'}
         options={this.props.options}
@@ -135,6 +137,7 @@ export class SelectBooleanInput extends Markup<SelectBooleanInputProps> {
         style={this.props.style}
         fill={this.props.fill}
         large={this.props.large}
+        size={this.props.size}
         id={this.id}
         intent={meta.error && meta.touched ? 'danger' : 'none'}
         options={options}
