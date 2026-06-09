@@ -73,7 +73,7 @@ module.exports = merge(base, {
   },
   plugins: [
     new DTSBundleWebpack({
-      name: 'blueprint-form',
+      name: '@lightbeamhealth/blueprint-form',
       baseDir: 'dist',
       main: 'dist/index.d.ts',
       out: 'index.d.ts',
