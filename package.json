@@ -1,12 +1,12 @@
 {
-  "name": "blueprint-form",
+  "name": "@lightbeamhealth/blueprint-form",
   "description": "A form composition layer for BlueprintJS using Formik.",
   "version": "2.0.0",
-  "author": "Evan Huang <evan.huang@caresignal.health>",
+  "author": "Lightbeam Health Solutions",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Epharmix/blueprint-form.git"
+    "url": "git+https://github.com/LB-CareSignal/blueprint-form.git"
   },
   "scripts": {
     "build": "tsc --project tsconfig.prod.json && webpack --config ./webpack.prod.js --mode production",
@@ -16,6 +16,10 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
     "formik": "^2.4.6",
     "uid": "^1.0.0",
