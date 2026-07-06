@@ -2,6 +2,7 @@ import 'core-js';
 import '../src/style.scss';
 
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom/client';
 import { createRoot } from 'react-dom/client';
 import { Card, Button, OverlayToaster, Intent, Position } from '@blueprintjs/core';
 
@@ -127,14 +128,17 @@ const App = () => {
 };
 
 const container = document.querySelector('#container');
-const root = createRoot(container!);
+if (!container) {
+  throw new Error('Root container #container not found in the document.');
+}
+const root = createRoot(container);
 
 const render = () => {
   root.render(<App />);
 };
 
 import('@axe-core/react').then(({ default: axe }) => {
-  axe(React, createRoot, 1000, {}, {
+  axe(React, ReactDOM, 1000, {}, {
     exclude: [['.exclude-axe']]
   });
   render();

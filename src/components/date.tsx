@@ -132,7 +132,7 @@ class DateInput extends Markup<DateInputProps & { formik?: FormikContextType<For
   private getInput(field, form, meta): JSX.Element {
     let fieldValue: string | null = null;
     if (meta.value instanceof Date) {
-      fieldValue = meta.value.toISOString();
+      fieldValue = this.formatDate(meta.value);
     } else if (typeof meta.value === 'string') {
       fieldValue = meta.value;
     }
