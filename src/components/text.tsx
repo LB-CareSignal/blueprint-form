@@ -196,7 +196,7 @@ export class TextArea extends Markup<TextAreaProps> {
         id={this.id}
         fill={this.props.fill}
         large={this.props.large}
-        autoResize={this.props.autoResize || this.props.growVertically}
+        autoResize={this.props.autoResize ?? this.props.growVertically}
         intent={meta.error && meta.touched ? 'danger' : 'none'}
         placeholder={this.props.placeholder}
         disabled={this.props.disabled || this.context.isDisabled}

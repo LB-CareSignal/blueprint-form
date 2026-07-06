@@ -185,7 +185,7 @@ const Enroll = (): JSX.Element => {
             label="Description"
             name="description"
             fill
-            growVertically
+            autoResize
             disabled={isDisabled}
           />
           <Checkbox
