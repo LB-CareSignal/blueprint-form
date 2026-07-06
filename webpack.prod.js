@@ -18,11 +18,11 @@ module.exports = merge(base, {
       amd: ['Blueprint', 'Core'],
       root: ['Blueprint', 'Core']
     },
-    '@blueprintjs/datetime2': {
-      commonjs: '@blueprintjs/datetime2',
-      commonjs2: '@blueprintjs/datetime2',
-      amd: ['Blueprint', 'Datetime2'],
-      root: ['Blueprint', 'Datetime2']
+    '@blueprintjs/datetime': {
+      commonjs: '@blueprintjs/datetime',
+      commonjs2: '@blueprintjs/datetime',
+      amd: ['Blueprint', 'Datetime'],
+      root: ['Blueprint', 'Datetime']
     },
     moment: {
       root: 'moment',
