@@ -13,6 +13,8 @@ import 'prismjs/themes/prism-okaidia.css';
 
 import Enroll from './enroll';
 
+const toasterPromise = OverlayToaster.create({ position: Position.TOP });
+
 const App = () => {
 
   const [rawData, setRawData] = useState('');
@@ -43,9 +45,7 @@ const App = () => {
       const data = JSON.parse(rawData);
       setFormData(data);
     } catch (err) {
-      const toaster = await OverlayToaster.create({
-        position: Position.TOP
-      });
+      const toaster = await toasterPromise;
       toaster.show({
         intent: Intent.DANGER,
         message: 'The form data is not valid JSON, please check!'

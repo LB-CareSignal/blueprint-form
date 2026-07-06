@@ -23,11 +23,11 @@ export interface FormExtraContextProviderProps {
   children?: React.ReactNode;
 }
 
-export const FormExtraContextProvider: React.FC<FormExtraContextProviderProps> = (props) => {
+export const FormExtraContextProvider: React.FC<FormExtraContextProviderProps> = ({ isDisabled, children }) => {
   const value: FormExtraContextValue = {
-    isDisabled: props.isDisabled
+    isDisabled
   };
-  return <FormExtraContext.Provider value={value} {...props} />;
+  return <FormExtraContext.Provider value={value}>{children}</FormExtraContext.Provider>;
 };
 
 export const useFormContext = <Values extends FormikValues>(): FormikContextType<Values> & FormExtraContextValue => {

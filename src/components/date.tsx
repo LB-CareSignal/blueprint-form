@@ -132,9 +132,7 @@ class DateInput extends Markup<DateInputProps & { formik?: FormikContextType<For
   private getInput(field, form, meta): JSX.Element {
     let fieldValue: string | null = null;
     if (meta.value instanceof Date) {
-      fieldValue = this.formatDate(meta.value);
-    } else if (typeof meta.value === 'string') {
-      fieldValue = meta.value;
+      fieldValue = meta.value.toISOString();
     }
     return (
       <_DateInput
@@ -158,9 +156,10 @@ class DateInput extends Markup<DateInputProps & { formik?: FormikContextType<For
           autoComplete: this.props.autoComplete ? this.props.autoComplete : 'off'
         }}
         value={fieldValue}
-        onChange={(value: string) => {
+        onChange={(value: string | null) => {
           form.setFieldTouched(field.name);
-          form.setFieldValue(field.name, value);
+          const dateValue = value ? new Date(value) : null;
+          form.setFieldValue(field.name, dateValue);
           if (this.props.onChange) {
             this.props.onChange();
           }
