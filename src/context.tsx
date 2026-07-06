@@ -20,6 +20,7 @@ export const FormExtraContext = createContext<FormExtraContextValue>({
 
 export interface FormExtraContextProviderProps {
   isDisabled?: boolean;
+  children?: React.ReactNode;
 }
 
 export const FormExtraContextProvider: React.FC<FormExtraContextProviderProps> = (props) => {

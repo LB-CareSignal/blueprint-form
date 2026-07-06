@@ -32,6 +32,7 @@ export abstract class Markup<P extends MarkupProps, S = unknown> extends Compone
   static getID = (): string => uid(16);
   
   static contextType = FormExtraContext;
+  declare context: React.ContextType<typeof FormExtraContext>;
 
   public readonly abstract type: MarkupType;
   protected readonly id: string;

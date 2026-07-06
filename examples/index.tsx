@@ -1,9 +1,9 @@
 import 'core-js';
 import '../src/style.scss';
 
-import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
-import { Card, Button, Toaster, Intent, Position } from '@blueprintjs/core';
+import { createRoot } from 'react-dom/client';
+import { Card, Button, OverlayToaster, Intent, Position } from '@blueprintjs/core';
 
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
@@ -36,15 +36,16 @@ const App = () => {
     setRawData(JSON.stringify(data, null, 2));
   };
 
-  const setData = (event: React.MouseEvent) => {
+  const setData = async (event: React.MouseEvent) => {
     event.preventDefault();
     try {
       const data = JSON.parse(rawData);
       setFormData(data);
     } catch (err) {
-      Toaster.create({
+      const toaster = await OverlayToaster.create({
         position: Position.TOP
-      }).show({
+      });
+      toaster.show({
         intent: Intent.DANGER,
         message: 'The form data is not valid JSON, please check!'
       });
@@ -125,12 +126,15 @@ const App = () => {
 
 };
 
+const container = document.querySelector('#container');
+const root = createRoot(container!);
+
 const render = () => {
-  ReactDOM.render(<App />, document.querySelector('#container'));
+  root.render(<App />);
 };
 
 import('@axe-core/react').then(({ default: axe }) => {
-  axe(React, ReactDOM, 1000, {}, {
+  axe(React, createRoot, 1000, {}, {
     exclude: [['.exclude-axe']]
   });
   render();

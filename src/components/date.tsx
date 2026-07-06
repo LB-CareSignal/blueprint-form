@@ -4,7 +4,7 @@ import uid from 'uid';
 import React from 'react';
 import { Field, FormikValues, connect, FormikContextType } from 'formik';
 import { FormGroup } from '@blueprintjs/core';
-import { DateInput3 as _DateInput } from '@blueprintjs/datetime2';
+import { DateInput as _DateInput } from '@blueprintjs/datetime';
 
 import { MarkupType, FormError } from './types';
 import { MarkupProps, Markup } from './markup';
