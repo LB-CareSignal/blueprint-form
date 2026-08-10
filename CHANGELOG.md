@@ -16,3 +16,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade `webpack-dev-server` to `6.0.0` and align repository development runtime to Node 22 via `.nvmrc`.
 - Add README guidance for package validation and release flow, including `npm pack --dry-run`, local `.tgz` consumer installation testing, and publish steps.
 - Fix all npm audit warnings (reduce to zero) as of 8/10/2026.
+- Add CHANGELOG and PR request template.
