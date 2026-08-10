@@ -1,7 +1,5 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const DTSBundleWebpack = require('dts-bundle-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const base = require('./webpack.config.js');
@@ -71,18 +69,6 @@ module.exports = merge(base, {
       exclude: path.resolve(__dirname, 'node_modules')
     }]
   },
-  plugins: [
-    new DTSBundleWebpack({
-      name: '@lightbeamhealth/blueprint-form',
-      baseDir: 'dist',
-      main: 'dist/index.d.ts',
-      out: 'index.d.ts',
-      removeSource: true
-    }),
-    new CleanWebpackPlugin({
-      cleanAfterEveryBuildPatterns: ['components']
-    })
-  ],
   output: {
     path: `${__dirname}/dist`,
     filename: 'index.js',

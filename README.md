@@ -4,11 +4,94 @@ An accessibility-friendly form composition library for [BlueprintJS](https://blu
 
 ### Development
 
+Use the Node version specified in `.nvmrc` before installing dependencies.
+
 After cloning the repo locally, install the required packages for the repo: `npm install`
 
 To start development, run: `npm run dev`
 
 This will start the `webpack-dev-server` at port `9000`, with hot reload enabled.
+
+### Package Testing
+
+Use this flow to validate exactly what will be published to npm.
+
+1. Build distributable artifacts.
+
+```bash
+npm run build
+```
+
+2. Inspect publish contents without publishing.
+
+```bash
+npm pack --dry-run --json
+```
+
+Verify that `dist/index.js`, `dist/index.d.ts`, and the referenced declaration files in `dist` are present.
+
+3. Create a local tarball.
+
+```bash
+npm pack
+```
+
+4. Install the generated tarball in a clean consumer project.
+
+```bash
+npm install /absolute/path/to/lightbeamhealth-blueprint-form-<version>.tgz
+```
+
+5. Validate consumer usage.
+
+- Confirm install succeeds with compatible peer dependency versions.
+- Import the package in the consumer app.
+- Run the consumer build/tests and verify components render without console errors.
+
+Peer dependency note: install failures such as `ERESOLVE` usually indicate incompatible consumer peer versions (for example Blueprint major mismatch).
+
+### Publishing
+
+1. Ensure you are on the intended release branch and Node version.
+
+```bash
+nvm use
+```
+
+2. Install dependencies and run a clean build.
+
+```bash
+npm install
+npm run build
+```
+
+3. Run package validation before publishing.
+
+```bash
+npm pack --dry-run --json
+```
+
+4. Bump version according to release type.
+
+```bash
+npm version patch
+```
+
+Use `minor` or `major` when appropriate.
+
+5. Publish to npm.
+
+```bash
+npm publish --access public
+```
+
+The `prepublishOnly` script runs the build automatically before publish.
+
+6. Push git changes and tag created by `npm version`.
+
+```bash
+git push && git push --tags
+```
 
 ### Capabilities
 
