@@ -4,7 +4,7 @@ import uid from 'uid';
 import React from 'react';
 import { Field, FormikValues, connect, FormikContextType } from 'formik';
 import { FormGroup } from '@blueprintjs/core';
-import { DateInput3 as _DateInput } from '@blueprintjs/datetime2';
+import { DateInput as _DateInput } from '@blueprintjs/datetime';
 
 import { MarkupType, FormError } from './types';
 import { MarkupProps, Markup } from './markup';
@@ -130,9 +130,9 @@ class DateInput extends Markup<DateInputProps & { formik?: FormikContextType<For
   }
 
   private getInput(field, form, meta): JSX.Element {
-    let fieldValue: string = meta.value;
-    if (meta.value instanceof Date) {
-      fieldValue = this.formatDate(meta.value);
+    let fieldValue: string | null = null;
+    if (meta.value instanceof Date && !isNaN(meta.value.getTime())) {
+      fieldValue = meta.value.toISOString();
     }
     return (
       <_DateInput
@@ -156,9 +156,10 @@ class DateInput extends Markup<DateInputProps & { formik?: FormikContextType<For
           autoComplete: this.props.autoComplete ? this.props.autoComplete : 'off'
         }}
         value={fieldValue}
-        onChange={(value: string) => {
+        onChange={(value: string | null) => {
           form.setFieldTouched(field.name);
-          form.setFieldValue(field.name, value);
+          const dateValue = value ? new Date(value) : null;
+          form.setFieldValue(field.name, dateValue);
           if (this.props.onChange) {
             this.props.onChange();
           }
