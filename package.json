@@ -1,7 +1,7 @@
 {
   "name": "@lightbeamhealth/blueprint-form",
   "description": "A form composition layer for BlueprintJS using Formik.",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "author": "Lightbeam Health Solutions",
   "license": "MIT",
   "repository": {
