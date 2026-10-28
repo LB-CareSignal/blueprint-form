@@ -145,7 +145,6 @@ class DateInput extends Markup<DateInputProps & { formik?: FormikContextType<For
         canClearSelection={false}
         minDate={this.props.min || DEFAULT_MIN}
         maxDate={this.props.max || DEFAULT_MAX}
-        initialMonth={this.props.min || new Date()}
         inputProps={{
           inputRef: (ref) => this.ref = ref,
           id: this.id,
