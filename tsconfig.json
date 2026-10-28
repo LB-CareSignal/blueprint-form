@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "NodeNext",
     "outDir": "dist/",
     "removeComments": true,
     "preserveConstEnums": true,
@@ -11,7 +11,7 @@
     "jsx": "react",
     "pretty": true,
     "skipLibCheck": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "esModuleInterop": true,
     "lib": ["dom", "dom.iterable", "ESNext"],
     "allowSyntheticDefaultImports": true,

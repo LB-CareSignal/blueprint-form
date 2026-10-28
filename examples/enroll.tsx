@@ -390,7 +390,7 @@ const Enroll = ({
               label="Description"
               name="description"
               fill
-              growVertically
+              autoResize
               spellCheck
               disabled={isFieldDisabled}
               onChange={onFieldChange.bind(this, 'description')}
@@ -598,7 +598,7 @@ const Enroll = ({
                 placeholder="Write your own salutation here..."
                 bare
                 fill
-                growVertically
+                autoResize
                 spellCheck
                 disabled={isFieldDisabled}
                 onChange={onFieldChange.bind(this, 'salute')}

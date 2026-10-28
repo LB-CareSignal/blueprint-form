@@ -29,12 +29,12 @@ export type DateSerialized<T, K extends keyof T> = {
   [key in K]: Date;
 } & Omit<T, K>;
 
-export interface FormInstanceOptions<T extends {[key in keyof T]: FormFieldValue}, S extends any = never> {
+export interface FormInstanceOptions<T extends {[key in keyof T]: FormFieldValue}, S = never> {
   serialize?: Transformer<T, S>;
   deserialize?: Transformer<S, T>;
 }
 
-export default class FormInstance<T extends {[key in keyof T]: FormFieldValue}, S extends any = never> {
+export default class FormInstance<T extends {[key in keyof T]: FormFieldValue}, S = never> {
 
   protected form: FormikProps<T> | null;
   public readonly initialData: T | null;

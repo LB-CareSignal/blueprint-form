@@ -1,9 +1,10 @@
 import 'core-js';
 import '../src/style.scss';
 
-import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
-import { Card, Button, Toaster, Intent, Position } from '@blueprintjs/core';
+import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import { Card, Button, OverlayToaster, Intent, Position } from '@blueprintjs/core';
 
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
@@ -11,6 +12,8 @@ import 'prismjs/components/prism-json';
 import 'prismjs/themes/prism-okaidia.css';
 
 import Enroll from './enroll';
+
+const toasterPromise = OverlayToaster.create({ position: Position.TOP });
 
 const App = () => {
 
@@ -36,15 +39,14 @@ const App = () => {
     setRawData(JSON.stringify(data, null, 2));
   };
 
-  const setData = (event: React.MouseEvent) => {
+  const setData = async (event: React.MouseEvent) => {
     event.preventDefault();
     try {
       const data = JSON.parse(rawData);
       setFormData(data);
-    } catch (err) {
-      Toaster.create({
-        position: Position.TOP
-      }).show({
+    } catch {
+      const toaster = await toasterPromise;
+      toaster.show({
         intent: Intent.DANGER,
         message: 'The form data is not valid JSON, please check!'
       });
@@ -125,12 +127,21 @@ const App = () => {
 
 };
 
+const container = document.querySelector('#container');
+if (!container) {
+  throw new Error('Root container #container not found in the document.');
+}
+const root = createRoot(container);
+
 const render = () => {
-  ReactDOM.render(<App />, document.querySelector('#container'));
+  root.render(<App />);
 };
 
+// @axe-core/react ships one ESM-style .d.ts for both its ESM and CommonJS builds, so
+// NodeNext resolution types `default` as the CommonJS module object. Webpack loads the
+// ESM build, where `default` is the function itself.
 import('@axe-core/react').then(({ default: axe }) => {
-  axe(React, ReactDOM, 1000, {}, {
+  (axe as unknown as typeof axe.default)(React, ReactDOM, 1000, {}, {
     exclude: [['.exclude-axe']]
   });
   render();

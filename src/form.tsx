@@ -68,7 +68,7 @@ const FormikOnError = <Values extends FormikValues>({ form }: FormikOnErrorProps
   return null;
 };
 
-interface FormProps<Values extends FormikValues, S extends any = never> {
+interface FormProps<Values extends FormikValues, S = never> {
   form: FormInstance<Values, S>,
   validate?: (values: Values) => void | FormErrors | Promise<FormErrors>;
   validateOnChange?: boolean;
@@ -81,7 +81,7 @@ interface FormProps<Values extends FormikValues, S extends any = never> {
   disabled?: boolean
 }
 
-const Form = <Values extends FormikValues, S extends any = never>({
+const Form = <Values extends FormikValues, S = never>({
   form: instance,
   validate,
   validateOnChange,
