@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.2] - 2026-10-28
+
+- Fix issue with how we parse date strings (we now use moment instead for greater reliability).
+
 ## [3.0.1] - 2026-10-28
 
 - Remove `initialMonth` prop from the DateInput component. 

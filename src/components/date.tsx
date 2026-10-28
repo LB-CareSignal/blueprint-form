@@ -157,7 +157,8 @@ class DateInput extends Markup<DateInputProps & { formik?: FormikContextType<For
         value={fieldValue}
         onChange={(value: string | null) => {
           form.setFieldTouched(field.name);
-          const dateValue = value ? new Date(value) : null;
+          // Parse with moment so date-only strings (YYYY-MM-DD) are local time rather than UTC
+          const dateValue = value ? moment(value).toDate() : null;
           form.setFieldValue(field.name, dateValue);
           if (this.props.onChange) {
             this.props.onChange();
