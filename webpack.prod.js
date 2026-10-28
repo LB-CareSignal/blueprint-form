@@ -30,9 +30,9 @@ module.exports = merge(base, {
     },
     'moment-timezone': {
       root: 'moment',
-      commonjs2: 'moment',
-      commonjs: 'moment',
-      amd: 'moment'
+      commonjs2: 'moment-timezone',
+      commonjs: 'moment-timezone',
+      amd: 'moment-timezone'
     },
     react: {
       commonjs: 'react',

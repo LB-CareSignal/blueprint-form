@@ -44,7 +44,7 @@ const App = () => {
     try {
       const data = JSON.parse(rawData);
       setFormData(data);
-    } catch (err) {
+    } catch {
       const toaster = await toasterPromise;
       toaster.show({
         intent: Intent.DANGER,
@@ -137,8 +137,11 @@ const render = () => {
   root.render(<App />);
 };
 
+// @axe-core/react ships one ESM-style .d.ts for both its ESM and CommonJS builds, so
+// NodeNext resolution types `default` as the CommonJS module object. Webpack loads the
+// ESM build, where `default` is the function itself.
 import('@axe-core/react').then(({ default: axe }) => {
-  axe(React, ReactDOM, 1000, {}, {
+  (axe as unknown as typeof axe.default)(React, ReactDOM, 1000, {}, {
     exclude: [['.exclude-axe']]
   });
   render();

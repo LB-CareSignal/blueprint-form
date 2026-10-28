@@ -2,11 +2,31 @@
 
 An accessibility-friendly form composition library for [BlueprintJS](https://blueprintjs.com/) using TypeScript, striving to be WCAG 2.1 compliant.
 
+### Installation
+
+Install the package along with its peer dependencies (React 18 and BlueprintJS 6):
+
+```bash
+npm install @lightbeamhealth/blueprint-form @blueprintjs/core @blueprintjs/datetime moment moment-timezone react react-dom
+```
+
+Load the Blueprint stylesheets once in your app:
+
+```ts
+import '@blueprintjs/core/lib/css/blueprint.css';
+import '@blueprintjs/datetime/lib/css/blueprint-datetime.css';
+```
+
+Upgrading from 2.x? Version 3 replaces `@blueprintjs/datetime2` with `@blueprintjs/datetime` and changes how date values are stored. See the [CHANGELOG](CHANGELOG.md) for migration notes.
+
 ### Development
 
-Use the Node version specified in `.nvmrc` before installing dependencies.
+After cloning the repo locally, switch to the Node version specified in `.nvmrc` and install the required packages:
 
-After cloning the repo locally, install the required packages for the repo: `npm install`
+```bash
+nvm use
+npm install
+```
 
 To start development, run: `npm run dev`
 
@@ -52,26 +72,11 @@ Peer dependency note: install failures such as `ERESOLVE` usually indicate incom
 
 ### Publishing
 
-1. Ensure you are on the intended release branch and Node version.
+1. Check out the intended release branch, then set up the Node version and dependencies as described in [Development](#development).
 
-```bash
-nvm use
-```
+2. Validate the package as described in [Package Testing](#package-testing).
 
-2. Install dependencies and run a clean build.
-
-```bash
-npm install
-npm run build
-```
-
-3. Run package validation before publishing.
-
-```bash
-npm pack --dry-run --json
-```
-
-4. Bump version according to release type.
+3. Bump version according to release type.
 
 ```bash
 npm version patch
@@ -79,15 +84,15 @@ npm version patch
 
 Use `minor` or `major` when appropriate.
 
-5. Publish to npm.
+4. Publish to npm.
 
 ```bash
-npm publish --access public
+npm publish
 ```
 
-The `prepublishOnly` script runs the build automatically before publish.
+The `prepublishOnly` script rebuilds the package automatically, and `publishConfig` in `package.json` sets public access and the npm registry.
 
-6. Push git changes and tag created by `npm version`.
+5. Push git changes and the tag created by `npm version`.
 
 ```bash
 git push && git push --tags
@@ -112,17 +117,19 @@ git push && git push --tags
 
 ### Components
 
-- Text Input
-- TextArea Input
-- Number Input
-- Date Input (Start Date, End Date variations)
-- Switch
-- Checkbox
-- Checkbox Group
-- Radio Group
-- Submit
+- `TextInput`
+- `TextArea`
+- `NumberInput`
+- `DateInput` (`StartDateInput`, `EndDateInput` variations)
+- `SelectInput`
+- `SelectBooleanInput`
+- `Switch`
+- `Checkbox`
+- `CheckboxGroup`
+- `RadioGroup`
+- `SubmitButton`
 
-In addition, you may use the `useField` hook exposed to create your own composite components. The reference of the hook can be found [here](https://jaredpalmer.com/formik/docs/api/useField).
+In addition, you may use the exposed `useField` hook (see the [Formik reference](https://formik.org/docs/api/useField)) together with `useFormContext` and `Markup` to create your own composite components. See `CountryInput` in [examples/enroll.tsx](examples/enroll.tsx) for a complete example.
 
 ### Example
 
@@ -132,6 +139,28 @@ This is a form that show cases the full range of functions and components:
 /**
  * Example form
  */
+
+import React from 'react';
+import moment from 'moment';
+import {
+  Form,
+  FormInstance,
+  FormErrors,
+  DateInput,
+  StartDateInput,
+  EndDateInput,
+  TextInput,
+  TextArea,
+  NumberInput,
+  Switch,
+  Checkbox,
+  CheckboxGroup,
+  RadioGroup,
+  SelectInput,
+  SubmitButton
+} from '@lightbeamhealth/blueprint-form';
+
+const REGEX_NAME = /^[a-zA-Z ]+$/;
 
 // Create an interface that defines the form data structure
 export interface EnrollData {
@@ -150,8 +179,7 @@ export interface EnrollData {
   modules: string[],
   days: number[],
   dmType: string,
-  color: string,
-  country: string
+  color: string
 }
 
 // Create the markup
@@ -177,13 +205,12 @@ const Enroll = (): JSX.Element => {
     modules: ['Y'],
     days: [1, 5],
     dmType: 'II',
-    color: 'green',
-    country: 'Air Nomads'
+    color: 'green'
   };
   const form = new FormInstance<EnrollData>(initialData);
 
   // Provide form level validation (e.g. validation on 2+ values)
-  const validate = (values: FormData): FormErrors => {
+  const validate = (values: EnrollData): FormErrors => {
     const errors: FormErrors = {};
     if (values.start != null && values.end != null && values.start > values.end) {
       errors.end = 'The end date must be after the start date!';
@@ -360,12 +387,6 @@ const Enroll = (): JSX.Element => {
               value: 'green'
             }]}
             fill
-            large={isLarge}
-            disabled={isDisabled}
-          />
-          <CountryInput
-            label="Country"
-            name="country"
             large={isLarge}
             disabled={isDisabled}
           />
